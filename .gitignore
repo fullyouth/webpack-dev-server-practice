@@ -1,0 +1,12 @@
+.temp/
+.rn_temp/
+node_modules/
+.DS_Store
+.idea/
+dist/.tea
+dist/weapp/.tea
+dist/alipay/.tea
+tools/
+dist/*
+!dist/h5
+.env.local
