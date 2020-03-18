@@ -10,3 +10,4 @@ tools/
 dist/*
 !dist/h5
 .env.local
+.vscode
