@@ -1,7 +1,4 @@
-import './style/index.scss'
+import Vue from 'vue'
+import Root from './app.vue'
 
-const abcd = () => {
-  console.log(1123)
-}
-
-abcd()
+new Vue(Root).$mount('#app');

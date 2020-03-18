@@ -2,12 +2,13 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 const { getIp } = require('./src/utils')
 const IP = getIp() || '127.0.0.1'
 const PORT = '3000'
 
-module.exports = (env,args) => {
+module.exports = (env, args) => {
   const isProductionMode = args.mode === 'production'
   return {
     mode: 'development',
@@ -24,14 +25,16 @@ module.exports = (env,args) => {
     },
     devtool: 'inline-source-map',
     plugins: [
-      new CleanWebpackPlugin(),
+      new VueLoaderPlugin(),
       new HtmlWebpackPlugin({
-        title:'单页面spa'
+        title: '单页面spa',
+        template: './src/index.html'
       }),
       new MiniCssExtractPlugin({
         filename: "[name].css",
         chunkFilename: "[id].css"
-      })
+      }),
+      new CleanWebpackPlugin()
     ],
     module: {
       rules: [{
@@ -64,24 +67,26 @@ module.exports = (env,args) => {
         },
         {
           test: /\.(svg)$/,
-          use: [
-            {
-              loader:'file-loader',
-              options:{
-                outputPath: 'images',
-                name: `[path][name]${isProductionMode ? '.[hash:8]' : ''}.[ext]`
-              }
+          use: [{
+            loader: 'file-loader',
+            options: {
+              outputPath: 'images',
+              name: `[path][name]${isProductionMode ? '.[hash:8]' : ''}.[ext]`
             }
-          ]
+          }]
         },
         {
           test: /\.(png|jpg|gif)$/,
           loader: 'url-loader',
           options: {
-              limit: 8192,
-              name: `assets/images/[name]${isProductionMode ? '.[hash:8]' : ''}.[ext]`
+            limit: 8192,
+            name: `assets/images/[name]${isProductionMode ? '.[hash:8]' : ''}.[ext]`
           }
-      }
+        },
+        {
+          test: /\.vue$/,
+          loader: 'vue-loader'
+        }
 
       ]
     }
