@@ -89,6 +89,13 @@ module.exports = (env, args) => {
         }
 
       ]
+    },
+    resolve: {
+      extensions: ['.wasm', '.mjs', '.js', '.json','.vue'],
+      alias: {
+        '@': path.resolve(__dirname, 'src/'),
+        'vue$': 'vue/dist/vue.esm.js'
+      }
     }
   }
 }

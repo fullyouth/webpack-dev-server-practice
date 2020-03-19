@@ -1,13 +1,10 @@
 <template>
-  <div class="example">{{ msg }}</div>
+  <div>{{ msg }}</div>
 </template>
 
 <script>
-import Header  from "../../components/header/index.vue"
-import Footer  from "../../components/footer/index.vue"
 
 export default {
-  components:{ Header,Footer },
   data () {
     return {
       msg: '这里是member页面'
