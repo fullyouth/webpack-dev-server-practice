@@ -3,8 +3,12 @@
 </template>
 
 <script>
-
 export default {
+  computed:{
+    count () {
+      return this.$store.state.count
+    }
+  },
   data () {
     return {
       msg: '这里是member页面'
